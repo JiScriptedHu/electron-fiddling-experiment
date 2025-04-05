@@ -15,7 +15,11 @@
     "commands": [
       {
         "command": "fiddle.helloWorld",
-        "title": "Hello World"
+        "title": "Fiddle: Hello World"
+      },
+      {
+        "command": "fiddle.getCurrentDirectory",
+        "title": "Fiddle: Current Directory"
       }
     ]
   },
