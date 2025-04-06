@@ -23,6 +23,12 @@ export function runActiveFiddleCommands(context: vscode.ExtensionContext) {
             const fiddleRunner = await Runner.create();
 
             const result = await fiddleRunner.run(electronVersion, workspaceFolder);
+
+            /* Currently due to some error, or mistake resulting is coming as failed everytime
+            which is needed to be fix
+
+            will fix it soon
+            */
             
             switch (result.status) {
                 case 'test_passed':

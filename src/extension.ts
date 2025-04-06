@@ -1,6 +1,7 @@
 import * as vscode from 'vscode';
 import { registerPathCommands } from './lib/getPath';
 import { runActiveFiddleCommands } from './lib/runActiveFiddle';
+import { bisectActiveFiddleCommands } from './lib/bisectActiveFiddle';
 
 export function activate(context: vscode.ExtensionContext) {
 
@@ -9,6 +10,8 @@ export function activate(context: vscode.ExtensionContext) {
 	registerPathCommands(context);
 	
 	runActiveFiddleCommands(context);
+
+	bisectActiveFiddleCommands(context);
 
 	helloWorld(context);
 }

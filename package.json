@@ -24,6 +24,10 @@
       {
         "command": "fiddle.runCurrentDirectory",
         "title": "Fiddle: Run Current Directory"
+      },
+      {
+        "command": "fiddle.bisectCurrentDirectory",
+        "title": "Fiddle: Bisect Current Directory"
       }
     ]
   },
