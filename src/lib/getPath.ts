@@ -1,7 +1,7 @@
 import * as vscode from 'vscode';
 
 export function registerPathCommands(context: vscode.ExtensionContext) {
-    const currPathCommand = vscode.commands.registerCommand('fiddle.getCurrentDirectory', () => {
+    const currentDirectory = vscode.commands.registerCommand('fiddle.getCurrentDirectory', () => {
         const workspaceFolder = vscode.workspace.workspaceFolders?.[0]?.uri.fsPath;
         
         if (workspaceFolder) {
@@ -11,5 +11,5 @@ export function registerPathCommands(context: vscode.ExtensionContext) {
         }
     });
     
-    context.subscriptions.push(currPathCommand);
+    context.subscriptions.push(currentDirectory);
 }
