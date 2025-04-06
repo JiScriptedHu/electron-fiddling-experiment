@@ -3,9 +3,7 @@ import { Runner } from '@electron/fiddle-core';
 
 export function runActiveFiddleCommands(context: vscode.ExtensionContext) {
     const runActiveFiddle = vscode.commands.registerCommand('fiddle.runCurrentDirectory', async () => {
-
         const workspaceFolder = vscode.workspace.workspaceFolders?.[0]?.uri.fsPath;
-
         if (!workspaceFolder) {
             vscode.window.showErrorMessage('No workspace folder is open. Please open a folder first.');
             return;
@@ -25,8 +23,33 @@ export function runActiveFiddleCommands(context: vscode.ExtensionContext) {
             const fiddleRunner = await Runner.create();
 
             const result = await fiddleRunner.run(electronVersion, workspaceFolder);
-
-            vscode.window.showInformationMessage(`Fiddle successfully run on electron version ${electronVersion}`);
+            
+            switch (result.status) {
+                case 'test_passed':
+                    vscode.window.showInformationMessage(
+                        `Fiddle successfully run on electron version ${electronVersion}`
+                    );
+                    break;
+                case 'test_failed':
+                    vscode.window.showWarningMessage(
+                        `Fiddle failed with exit code 1 on electron version ${electronVersion}`
+                    );
+                    break;
+                case 'test_error':
+                    vscode.window.showErrorMessage(
+                        `Fiddle encountered a test error on electron version ${electronVersion}`
+                    );
+                    break;
+                case 'system_error':
+                    vscode.window.showErrorMessage(
+                        `System error occurred while running fiddle on electron version ${electronVersion}`
+                    );
+                    break;
+                default:
+                    vscode.window.showErrorMessage(
+                        `Unknown result status while running fiddle on electron version ${electronVersion}`
+                    );
+            }
         }
         catch (error) {
             vscode.window.showErrorMessage(`Failed to run Fiddle: ${error}`);
